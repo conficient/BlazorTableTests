@@ -11,11 +11,15 @@
 }
 else
 {
-    <Table TableItem="WeatherForecast" Items="forecasts" PageSize="15">
-        <Column TableItem="WeatherForecast" Title="Date" Field="@(x => x.Date)" Format="d-MMM-yy" Sortable="true" Filterable="true" />
-        <Column TableItem="WeatherForecast" Title="Temp. (C)" Field="@(x => x.TemperatureC)" Sortable="true" Filterable="true"  />
-        <Column TableItem="WeatherForecast" Title="Temp. (F)" Field="@(x => x.TemperatureF)" Sortable="true" Filterable="true" />
+    <Table TableItem="WeatherForecast" Items="forecasts" PageSize="15" ShowFooter="true">
+        <Column TableItem="WeatherForecast" Title="Date" Field="@(x => x.Date)" Format="d-MMM-yy" Sortable="true" Filterable="true" SetFooterValue="Count"/>
+        <Column TableItem="WeatherForecast" Title="Temp. (C)" Field="@(x => x.TemperatureC)" Sortable="true" Filterable="true" SetFooterValue="Avg" />
+        <Column TableItem="WeatherForecast" Title="Temp. (F)" Field="@(x => x.TemperatureF)" Sortable="true" Filterable="true" SetFooterValue="Avg" />
         <Column TableItem="WeatherForecast" Title="Summary" Field="@(x => x.Summary)" Sortable="true" Filterable="true"  />
+        <DetailTemplate TableItem="WeatherForecast">
+            <h6>@context.Date.ToShortDateString()</h6>
+            <h5>@context.Summary</h5>
+        </DetailTemplate>
         <Pager ShowPageNumber="true" ShowTotalCount="true" />
     </Table>
 }
