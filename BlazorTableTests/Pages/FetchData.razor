@@ -11,16 +11,28 @@
 }
 else
 {
-    <Table TableItem="WeatherForecast" Items="forecasts" PageSize="15">
-        <Column TableItem="WeatherForecast" Title="Date" Field="@(x => x.Date)" Format="d-MMM-yy" Sortable="true" Filterable="true" />
-        <Column TableItem="WeatherForecast" Title="Temp. (C)" Field="@(x => x.TemperatureC)" Sortable="true" Filterable="true"  />
-        <Column TableItem="WeatherForecast" Title="Temp. (F)" Field="@(x => x.TemperatureF)" Sortable="true" Filterable="true" />
-        <Column TableItem="WeatherForecast" Title="Summary" Field="@(x => x.Summary)" Sortable="true" Filterable="true"  />
-        <Pager ShowPageNumber="true" ShowTotalCount="true" />
-    </Table>
+<Table TableItem="WeatherForecast" Items="forecasts" PageSize="15">
+    <Column TableItem="WeatherForecast" Title="Date" Field="@(x => x.Date)" Format="d-MMM-yy" Sortable="true" Filterable="true" />
+    <Column TableItem="WeatherForecast" Title="Temp. (C)" Field="@(x => x.TemperatureC)" Sortable="true" Filterable="true" />
+    <Column TableItem="WeatherForecast" Title="Temp. (F)" Field="@(x => x.TemperatureF)" Sortable="true" Filterable="true" />
+    <Column TableItem="WeatherForecast" Title="Summary" Field="@(x => x.Summary)" Sortable="true" Filterable="true" />
+    <Column TableItem="WeatherForecast" Title="Delete" Field="@(x => x.Date)" Sortable="true" >
+        <Template>
+            <BlazorDialog id=@context.Date.ToString() OnClick=HandleDelete></BlazorDialog>
+        </Template>
+    </Column>
+    <Pager ShowPageNumber="true" ShowTotalCount="true" />
+</Table>
 }
 
 @code {
+
+    private Task HandleDelete(string id)
+    {
+        Console.WriteLine("Delete not handled for " + id);
+        return Task.FromResult(0);
+    }
+
     private WeatherForecast[] forecasts;
 
     protected override async Task OnInitializedAsync()
