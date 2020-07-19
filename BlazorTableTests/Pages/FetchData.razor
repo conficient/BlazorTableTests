@@ -11,27 +11,13 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <Table TableItem="WeatherForecast" Items="forecasts" PageSize="15">
+        <Column TableItem="WeatherForecast" Title="Date" Field="@(x => x.Date)" Format="d-MMM-yy" Sortable="true" Filterable="true" />
+        <Column TableItem="WeatherForecast" Title="Temp. (C)" Field="@(x => x.TemperatureC)" Sortable="true" Filterable="true"  />
+        <Column TableItem="WeatherForecast" Title="Temp. (F)" Field="@(x => x.TemperatureF)" Sortable="true" Filterable="true" />
+        <Column TableItem="WeatherForecast" Title="Summary" Field="@(x => x.Summary)" Sortable="true" Filterable="true"  />
+        <Pager ShowPageNumber="true" ShowTotalCount="true" />
+    </Table>
 }
 
 @code {
